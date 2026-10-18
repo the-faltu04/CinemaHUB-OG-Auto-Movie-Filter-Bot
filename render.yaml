@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cinema-hub-og-main
+    runtime: python
+    branch: main
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /health
+    autoDeploy: true
+
+  - type: web
+    name: cinema-hub-og-stream
+    runtime: docker
+    branch: main
+    rootDir: stream_server
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
